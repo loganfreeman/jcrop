@@ -1,0 +1,27 @@
+body {
+  
+}
+
+.clear {
+	clear: both;
+}
+
+.center {
+	background: #231f20;
+	margin: 0 auto;
+}
+
+.inner {
+clear: both;
+height: 320px;
+margin: 0 auto;
+padding: 10px 10px 10px 10px;
+position: relative;
+width: 930px;
+background: white;
+}
+
+.effect {
+	border-style: solid;
+    border-width: 5px;
+}

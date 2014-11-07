@@ -1,0 +1,15 @@
+{
+  "name": "jcrop_test_project",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shanhong cheng",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "~4.9.8",
+    "ejs": "~1.0.0"
+  }
+}

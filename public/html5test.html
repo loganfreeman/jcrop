@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<link href="/css/style.css" media="all" rel="stylesheet" type="text/css">
+    </head>    
+    <body>
+		<div class='center clear'>
+		<div class='inner effect'>
+				    	<h2>HTML5 / Javascript Assessment</h2>
+    	<p>
+    		Please take the form on this page and <b>write your own HTML5 page</b> design the page to
+            match the style of our public website but create your own custom content. Second using jQuery
+            call the company API and populate the form when the page loads with the returned values. Finally 
+    		upon the user entering valid input into the form, submit the form to the validation
+    		API using an AJAX call and then report the results.
+    	</p>
+    	<p>
+    		Please style your page in the same style as our public website to demonstrate your
+    		skill in designing user interfaces that integrate with our current applications.
+    	</p>
+    	<blockquote>
+    		<h4>Resources</h4>
+    		<ul>
+    			<li>WheelerCAT website <a href="http://www.WheelerCAT.com/">www.WheelerCAT.com</a></li>
+    			<li>Company Info API: <a href="http://ww2.wheelercat.com/test/providers/getCompanyInfo.jsp">Link</a>
+    			<li>Validation API: <a href="http://ww2.wheelercat.com/test/controllers/testController.jsp">Link</a>
+    		</ul>
+    	</blockquote>
+		</div>
+
+		</div>
+    	<hr>
+		<div class='center clear'>
+		<div class='inner effect'>
+				    	<button onclick="getCompanyInfo()" style='display:none;'>Get Company Info</button>
+        <form id="form1">
+            <label>Company Name:</label><input type="text" id="cname" name="company_name"/><br>
+            <label>Company ID:</label><input type="text" id="cid" name="company_id"/><br>
+            <label>Company ZIP:</label><input type="text" id="czip" name="zip"/><br>
+            <label>Employee Name:</label><input type="text" id="ename" name="employee_name"/><br>
+            <button onclick="submitForm(); return false;">Submit</button>
+        </form>
+		</div>
+
+		</div>
+		
+		<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script>
+
+			function getCompanyInfo(){
+                $.ajax({
+                  url: "http://ww2.wheelercat.com/test/providers/getCompanyInfo.jsp?mode=jsonp",
+                  dataType: "jsonp",
+                  success: function(result){
+                    if(result.successful){
+                        var row = result.rows[0];
+                        $("#cname").val(row.name);
+                        $("#cid").val(row.company_id);
+                        $("#czip").val(row.zip);
+                    }
+                  },                  
+                });			
+			}
+            
+            function submitForm(){
+                $.ajax({
+                  url: "http://ww2.wheelercat.com/test/controllers/testController.jsp?" + $("#form1").serialize(),
+                  dataType: "jsonp",
+                  method:"POST",
+                  success: function(result){
+                    alert("Stage1:" + result.stage1 + "\r\nStage2:" + result.stage2 +"\r\nStage3:"+ result.stage3);
+                  },
+                  error:function(xhr,err,msg){
+                  	console.log(msg);
+                  }
+                });            
+            }
+        </script>
+		
+		<script>
+        $(document).ready(function(){
+        	// using jQuery call the company API and populate the form when the page loads with the returned values
+        	getCompanyInfo();
+        });
+		</script>
+    </body>
+</html>
+
